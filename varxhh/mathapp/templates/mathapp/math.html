@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title>Math Server</title>
+</head>
+<body>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Customers Lost:</label>
+        <input type="number" name="lost" value="{{l}}" min="0" required>
+        <br><br>
+
+        <label>Initial Customers:</label>
+        <input type="number" name="initial" value="{{i}}" min="0" required>
+        <br><br>
+
+        <input type="submit" value="Calculate">
+        <br><br>
+
+        <label>Churn Rate:</label>
+        <input type="number" value="{{churnrate}}" readonly>
+        <br><br>
+
+    </form>
+
+</body>
+</html>
+
+
+        
