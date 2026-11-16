@@ -1,5 +1,5 @@
 # Ex.03 Design a Website for Server Side Processing
-## Date:
+## Date:16/11/2026
 
 ## AIM:
 To create a web page to calculate Churn Rate using server-side scripts.
@@ -42,13 +42,76 @@ Render the result to the HTML template.
 Publish the website in Localhost.
 
 ## PROGRAM:
+```
+math.html
+<html>
+<head>
+    <title>Math Server</title>
+</head>
+<body>
 
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Customers Lost:</label>
+        <input type="number" name="lost" value="{{l}}" min="0" required>
+        <br><br>
+
+        <label>Initial Customers:</label>
+        <input type="number" name="initial" value="{{i}}" min="0" required>
+        <br><br>
+
+        <input type="submit" value="Calculate">
+        <br><br>
+
+        <label>Churn Rate:</label>
+        <input type="number" value="{{churnrate}}" readonly>
+        <br><br>
+
+    </form>
+
+</body>
+</html>
+
+views.py
+
+from django.shortcuts import render
+
+def churn_rate(request):
+    i = 0
+    l = 0
+    churnrate = 0
+
+    if request.method == 'POST':
+        i = int(request.POST.get('initial', 0))
+        l = int(request.POST.get('lost', 0))
+
+        if i > 0:
+            churnrate = (l / i) * 100
+    print("i:", i)    
+    print("l:" ,l)    
+    print("churnrate:",churnrate)
+    return render(request, 'mathapp/math.html', {
+        'i': i,
+        'l': l,
+        'churnrate': churnrate
+    })
+
+urls.py
+
+from django.contrib import admin
+from django.urls import path
+from mathapp import views
+
+urlpatterns = [ path('', views.churn_rate, name='churn_rate'), ]
+       
+```
 
 ## OUTPUT - SERVER SIDE:
-
+![alt text](image.png)
 
 ## OUTPUT - WEBPAGE:
-
+![alt text](image-1.png)
 
 ## RESULT:
 The the web page to calculate Churn Rate using server-side scripts is created successfully.
