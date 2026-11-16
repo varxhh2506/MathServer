@@ -111,7 +111,7 @@ urlpatterns = [ path('', views.churn_rate, name='churn_rate'), ]
 ![alt text](image.png)
 
 ## OUTPUT - WEBPAGE:
-![alt text](image-1.png)
+![alt text](<Screenshot (13).png>)
 
 ## RESULT:
 The the web page to calculate Churn Rate using server-side scripts is created successfully.
